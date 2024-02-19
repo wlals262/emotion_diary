@@ -25,7 +25,7 @@ const DiaryEditor = ({isEdit, originData}) => {
     }
 
     const navigate = useNavigate();
-    const {onCreate, onEdit} = useContext(DiaryDispatchContext); //기존에 만들었던 provider의 onCreate함수를 사용한다.
+    const {onCreate, onEdit, onRemove} = useContext(DiaryDispatchContext); //기존에 만들었던 provider의 onCreate함수를 사용한다.
 
     const handleSubmit = () => {
         if(content.length < 1){
@@ -44,6 +44,13 @@ const DiaryEditor = ({isEdit, originData}) => {
         navigate('/',{replace:true}); //home으로 돌아가는데 뒤로가기로 일기작성페이지로 다시 못오게 막아야한다.
     }
 
+    const handleRemove = () => {
+        if(window.confirm('정말 삭제하시겠습니까?')){
+            onRemove(originData.id);
+            navigate('/',{replace:true});
+        }
+    }
+
     useEffect(() => { //프롭으로 isEdit과 originData를 준 경우(Edit.js에서 보낸경우)만 해당되어 코드 실행
         if(isEdit) {
             setDate(getStringDate(new Date(parseInt(originData.date))));
@@ -57,6 +64,9 @@ const DiaryEditor = ({isEdit, originData}) => {
             <MyHeader 
                 headText={isEdit ? "일기 수정하기" :"새 일기쓰기" }
                 leftChild={<MyButton text={"< 뒤로가기"} onClick={() => navigate(-1)}/>}
+                rightChild={isEdit && (
+                    <MyButton text={"삭제하기"} type={'negative'} onClick={handleRemove}/>
+                )}
             />
             <div>
                 {/* 날짜 선택 */}

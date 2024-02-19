@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { DiaryDispatchContext } from "../App";
 
 import MyHeader from "./MyHeader";
@@ -12,17 +12,15 @@ import { emotionList } from "../util/emotion";
 const env = process.env;
 env.PUBLIC_URL = env.PUBLIC_URL || "";
 
-
 const DiaryEditor = ({isEdit, originData}) => {
-
     const contentRef = useRef();
     const [content, setContent] = useState("");
     const [emotion, setEmotion] = useState(3);
     const [date, setDate] = useState(getStringDate(new Date()));
 
-    const handleClickEmote = (emotion) => {
+    const handleClickEmote = useCallback((emotion) => {
         setEmotion(emotion);
-    }
+    },[]);
 
     const navigate = useNavigate();
     const {onCreate, onEdit, onRemove} = useContext(DiaryDispatchContext); //기존에 만들었던 provider의 onCreate함수를 사용한다.

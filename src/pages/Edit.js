@@ -17,6 +17,7 @@ const Edit = () => {
             if (targetDiary) { //id가 있는경우(일기장이 있는 경우)는 그냥 출력, 없는 경우 홈으로 이동시킴
                 setOriginData(targetDiary);
             } else {
+                alert("없는 일기입니다.");
                 navigate('/',{replace: true});
             }
         }

@@ -28,7 +28,7 @@ const ControlMenu = ({value, onChange, optionList}) => { //정렬을 위한 sele
 
 const DiaryList = ({diaryList}) => {
     const navigate = useNavigate();
-    const [sortType, setSortType] = useState('lastest'); //정렬값 저장 state
+    const [sortType, setSortType] = useState('latest'); //정렬값 저장 state
     const [filter,setFilter] = useState("all"); //감정필터링
 
     const getProcessedDiaryList = () => { //정렬할때 sort를 쓰면 원본 데이터가 날아가므로 깊은 복사로 새로운 곳에 data 저장해서 사용

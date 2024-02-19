@@ -24,16 +24,15 @@ const Home = () => {
             const lastDay = new Date( //이번년도 다음달의 0 이므로 이번달의 마지막일
                 curDate.getFullYear(),
                 curDate.getMonth() + 1,
-                0
+                0,
+                23,
+                59,
+                59
             ).getTime();
 
             setData(diaryList.filter((it) => firstDay <= it.date && it.date <= lastDay)); //시작할때와 끝날때 사이
         }
     },[diaryList, curDate]); //일기 수정 시 , 현재 날짜 커서를 다음달이나 이전달로 넘겼을 때 리렌더
-
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
 
     const increaseMonth = () => {
         setCurDate(new Date(curDate.getFullYear(), curDate.getMonth()+1, curDate.getDate())); //현재 년도 , 월에 +1 , 현재 일

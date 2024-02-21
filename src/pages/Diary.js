@@ -12,6 +12,11 @@ const Diary = () => {
     const navigate = useNavigate();
     const [data, setData] = useState();
 
+    useEffect(()=>{
+        const titleElement = document.getElementsByTagName('title')[0]; //문서객체에서 title이라는 이름을 가진 요소를 모두 가져옴 [0] 그중 0번째 반환
+        titleElement.innerHTML = `감정 일기장 - ${id}번 일기`;
+    },[]);
+
     useEffect(() => {
         if(diaryList.length >= 1){
             const targetDiary = diaryList.find((it) => parseInt(it.id) === parseInt(id));

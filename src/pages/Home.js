@@ -13,6 +13,11 @@ const Home = () => {
     const [curDate, setCurDate] = useState(new Date());   
     const headText = `${curDate.getFullYear()}년 ${curDate.getMonth() + 1}월`;
 
+    useEffect(()=>{
+        const titleElement = document.getElementsByTagName('title')[0];
+        titleElement.innerHTML = `감정 일기장`;
+    },[]);
+
     useEffect(() => { //현재 년도와 월에 해당하는 일기만 뽑아야 함
         if(diaryList.length >= 1){ // 처리가 오래걸리므로 다이어리 리스트가 1이상일때만 진행
             const firstDay = new Date( //이번년도 이번 월의 1일
